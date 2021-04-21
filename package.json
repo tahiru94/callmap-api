@@ -21,6 +21,7 @@
   "homepage": "https://github.com/tahiru94/callmap-api#readme",
   "devDependencies": {
     "@types/express": "^4.17.11",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
   "dependencies": {
