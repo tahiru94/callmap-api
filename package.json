@@ -1,0 +1,22 @@
+{
+  "name": "callmap-api",
+  "version": "0.1.0",
+  "description": "An Express based API for the Callmap App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tahiru94/callmap-api.git"
+  },
+  "author": "Usman Tahir",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/tahiru94/callmap-api/issues"
+  },
+  "homepage": "https://github.com/tahiru94/callmap-api#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
