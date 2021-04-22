@@ -1,17 +1,14 @@
-import { Request, Response, Application } from 'express';
+import { Application } from 'express';
+
+import CallmapRecordController from '../controllers/callmap-record.controller';
 
 class Routes {
+    private callmapRecordController: CallmapRecordController = new CallmapRecordController();
+
     public routes(app: Application) {
-        app.route('/')
-            .get((req: Request, res: Response) => {
-                res.status(200)
-                    .send({ message: 'GET / successful' });
-            });
         app.route('/callmap-record')
-            .get((req: Request, res: Response) => {
-                res.status(200)
-                    .send({ message: 'GET /callmap-record successful' });
-            });
+            .get(this.callmapRecordController.getAllCallmapRecords)
+            .post(this.callmapRecordController.createCallmapRecord);
     }
 }
 
