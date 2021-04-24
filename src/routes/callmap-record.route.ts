@@ -9,6 +9,9 @@ class Routes {
         app.route('/callmap-record')
             .get(this.callmapRecordController.getAllCallmapRecords)
             .post(this.callmapRecordController.createCallmapRecord);
+        app.route('/callmap-record/:id')
+            .get(this.callmapRecordController.getCallmapRecordById)
+            .put(this.callmapRecordController.updateCallmapRecordById);
     }
 }
 
