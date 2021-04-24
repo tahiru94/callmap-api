@@ -24,7 +24,11 @@ const getLatestCallmapRecord = (callmapRecord: any) => {
     return latest;
 }
 
+const titleCase = (input: string) => {
+    return input[0].toUpperCase() + input.slice(1);
+}
+
 export default {
     getLatestCallmapRecordForAll,
-    getLatestCallmapRecord
+    getLatestCallmapRecord, titleCase
 }

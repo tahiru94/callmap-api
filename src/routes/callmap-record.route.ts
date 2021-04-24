@@ -14,6 +14,8 @@ class Routes {
         app.route('/callmap-record/:id')
             .get(this.callmapRecordController.getCallmapRecordById)
             .put(this.callmapRecordController.updateCallmapRecordById);
+        app.route('/callmap-record/priority/:priority')
+            .get(this.callmapRecordController.getLatestCallmapRecordsByPriority);
     }
 }
 
