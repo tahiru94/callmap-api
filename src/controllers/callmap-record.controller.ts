@@ -94,19 +94,6 @@ class CallmapRecordController {
         });
     }
 
-    // GET Callmap Record by priority
-    public getLatestCallmapRecordsByPriority(req: Request, res: Response) {
-        const { priority } = req.params;
-        CallmapRecord.find({ priority: utils.default.titleCase(priority) }, (err: any, callmapRecord: any) => {
-            if (err) {
-                res.status(404).send(err);
-            }
-
-            const latestCallmapRecordForAll = utils.default.getLatestCallmapRecordForAll(callmapRecord);
-            res.status(200).json(latestCallmapRecordForAll);
-        });
-    }
-
     // DELETE Callmap Record by id (latest)
     public deleteCallmapRecordById(req: Request, res: Response) {
         const { id } = req.params;
@@ -140,6 +127,32 @@ class CallmapRecordController {
                     res.status(404).json({ success: false });
                 }
             }
+        });
+    }
+
+    // GET Callmap Record by id and version
+    public getCallmapRecordByIdAndVersion(req: Request, res: Response) {
+        const { id, version } = req.params;
+
+        CallmapRecord.findOne({ id, version }, (err: any, callmapRecord: any) => {
+            if (err) {
+                res.status(404).json(err);
+            }
+
+            res.status(200).json(callmapRecord);
+        });
+    }
+
+    // GET Callmap Record by priority
+    public getLatestCallmapRecordsByPriority(req: Request, res: Response) {
+        const { priority } = req.params;
+        CallmapRecord.find({ priority: utils.default.titleCase(priority) }, (err: any, callmapRecord: any) => {
+            if (err) {
+                res.status(404).send(err);
+            }
+
+            const latestCallmapRecordForAll = utils.default.getLatestCallmapRecordForAll(callmapRecord);
+            res.status(200).json(latestCallmapRecordForAll);
         });
     }
 }
