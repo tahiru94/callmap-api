@@ -32,6 +32,7 @@ const CallmapRecordSchema = new Schema({
     },
     priority: {
         type: String,
+        enum: ['Low', 'Medium', 'High'],
         default: 'Low' // Low, Medium, High
     },
     additionalNotes: {
