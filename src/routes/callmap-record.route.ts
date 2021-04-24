@@ -13,7 +13,8 @@ class Routes {
             .get(this.callmapRecordController.getAllLatestCallmapRecords);
         app.route('/callmap-record/:id')
             .get(this.callmapRecordController.getCallmapRecordById)
-            .put(this.callmapRecordController.updateCallmapRecordById);
+            .put(this.callmapRecordController.updateCallmapRecordById)
+            .delete(this.callmapRecordController.deleteCallmapRecordById);
         app.route('/callmap-record/priority/:priority')
             .get(this.callmapRecordController.getLatestCallmapRecordsByPriority);
     }

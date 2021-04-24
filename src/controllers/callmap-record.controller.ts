@@ -106,6 +106,42 @@ class CallmapRecordController {
             res.status(200).json(latestCallmapRecordForAll);
         });
     }
+
+    // DELETE Callmap Record by id (latest)
+    public deleteCallmapRecordById(req: Request, res: Response) {
+        const { id } = req.params;
+
+        CallmapRecord.find({ id }, (err: any, callmapRecord: any) => {
+            console.log('callmapRecord is', callmapRecord);
+            if (err) {
+                res.status(404).send({ success: false, error: err });
+            }
+
+            if (!callmapRecord.length) {
+                // No Callmap Records found
+                res.status(404).json({
+                    success: false,
+                    id,
+                    message: `Could not find Callmap Record with specified id`
+                });
+            } else {
+                if (callmapRecord) {
+                    const latest = utils.default.getLatestCallmapRecord(callmapRecord);
+
+                    CallmapRecord.deleteOne({ _id: latest._id }).then(() => {
+                        res.status(200).json({
+                            success: true,
+                            id: latest.id,
+                            createdAt: latest.timestamp,
+                            latestVersion: latest.version,
+                        });
+                    });
+                } else {
+                    res.status(404).json({ success: false });
+                }
+            }
+        });
+    }
 }
 
 export default CallmapRecordController;
