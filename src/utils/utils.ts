@@ -28,7 +28,17 @@ const titleCase = (input: string) => {
     return input[0].toUpperCase() + input.slice(1);
 }
 
+const removeKey = (obj: any, keyName: string) => {
+    let clone = Object.assign({}, obj);
+    console.log('clone is', clone);
+    const output = (delete clone[keyName], clone);
+    console.log('output is', output);
+    return output;
+}
+
 export default {
     getLatestCallmapRecordForAll,
-    getLatestCallmapRecord, titleCase
+    getLatestCallmapRecord,
+    titleCase,
+    removeKey
 }

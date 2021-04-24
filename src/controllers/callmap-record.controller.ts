@@ -68,6 +68,7 @@ class CallmapRecordController {
 
             if (callmapRecord) {
                 const latest = utils.default.getLatestCallmapRecord(callmapRecord);
+                console.log('latest', latest);
 
                 newCallmapRecord = new CallmapRecord({
                     timestamp: latest.timestamp,
@@ -76,8 +77,8 @@ class CallmapRecordController {
                     phoneNumber: latest.phoneNumber,
                     callNote: latest.callNote,
                     priority: latest.priority,
-                    additionalNotes: [...latest.additionalNotes],
-                    ...req.body,
+                    additionalNotes: latest.additionalNotes.concat(req.body.additionalNotes),
+                    ...utils.default.removeKey(req.body, 'additionalNotes'),
                     version: new Date(),
                     id
                 });
