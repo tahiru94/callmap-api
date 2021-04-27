@@ -1,5 +1,6 @@
 import { model } from 'mongoose';
 import { Request, Response } from 'express';
+import { v4 } from 'uuid';
 
 import CallmapRecordSchema from '../models/callmap-record.model';
 import * as utils from '../utils/utils';
@@ -20,7 +21,7 @@ class CallmapRecordController {
 
     // POST Callmap Record
     public createCallmapRecord(req: Request, res: Response) {
-        const newCallmapRecord = new CallmapRecord(req.body);
+        const newCallmapRecord = new CallmapRecord({ ...req.body, id: v4() });
 
         newCallmapRecord.save((err: any, callmapRecord: any) => {
             if (err) {
@@ -52,7 +53,10 @@ class CallmapRecordController {
                 res.status(404).json(err);
             }
 
-            res.status(200).json(callmapRecord);
+            if (callmapRecord) {
+                const latest = utils.default.getLatestCallmapRecord(callmapRecord);
+                res.status(200).json(latest);
+            }
         });
     }
 
@@ -68,7 +72,6 @@ class CallmapRecordController {
 
             if (callmapRecord) {
                 const latest = utils.default.getLatestCallmapRecord(callmapRecord);
-                console.log('latest', latest);
 
                 newCallmapRecord = new CallmapRecord({
                     timestamp: latest.timestamp,
@@ -99,7 +102,6 @@ class CallmapRecordController {
         const { id } = req.params;
 
         CallmapRecord.find({ id }, (err: any, callmapRecord: any) => {
-            console.log('callmapRecord is', callmapRecord);
             if (err) {
                 res.status(404).send({ success: false, error: err });
             }

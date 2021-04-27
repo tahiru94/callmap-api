@@ -30,9 +30,7 @@ const titleCase = (input: string) => {
 
 const removeKey = (obj: any, keyName: string) => {
     let clone = Object.assign({}, obj);
-    console.log('clone is', clone);
     const output = (delete clone[keyName], clone);
-    console.log('output is', output);
     return output;
 }
 

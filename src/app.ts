@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import { json, urlencoded } from 'body-parser';
+import cors from 'cors';
 import mongoose from 'mongoose';
 
 import Routes from './routes/callmap-record.route';
@@ -18,6 +19,7 @@ class App {
     }
 
     private config(): void {
+        this.app.use(cors());
         this.app.use(json());
         this.app.use(urlencoded({ extended: false }));
     }
