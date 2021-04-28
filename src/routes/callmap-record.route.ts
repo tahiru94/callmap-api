@@ -2,7 +2,7 @@ import { Application } from 'express';
 
 import CallmapRecordController from '../controllers/callmap-record.controller';
 
-class Routes {
+class CallmapRecordRoutes {
     private callmapRecordController: CallmapRecordController = new CallmapRecordController();
 
     public routes(app: Application) {
@@ -22,4 +22,4 @@ class Routes {
     }
 }
 
-export default Routes;
+export default CallmapRecordRoutes;
